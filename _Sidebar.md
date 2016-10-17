@@ -1,3 +1,4 @@
+Message Types
 <ul>
-<li>Message Types</li>
+<li>[CreateOrUpdateObjectRequest](https://github.com/ugcs/ugcs-dotnet-sdk/wiki/CreateOrUpdateObjectRequest)</li>
 </ul>
