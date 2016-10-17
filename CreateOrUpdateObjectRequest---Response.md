@@ -22,5 +22,5 @@ CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()
 ```
 CreateOrUpdateObjectResponse
 ```C#
-Executor.Submit<CreateOrUpdateObjectResponse>(request );
+Executor.Submit<CreateOrUpdateObjectResponse>(request);
 ```
