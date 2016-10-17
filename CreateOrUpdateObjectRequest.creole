@@ -1,4 +1,5 @@
-| *Property*     | *Type* | *Description*      | *Required* |
+| Property     | Type | Description | Required |
+| ------------- |:-------------:| -----:| -----:|
 | ClientId      | int | Current connection client ID | Yes |
 | ObjectType    | string | Object type (Route, Mission etc...)      | Yes |
 | WithComposites | bool | ... | No |
