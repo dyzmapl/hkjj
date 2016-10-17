@@ -1,3 +1,13 @@
+| Property      | Type |Description         |
+| ------------- |:-------------:|:-------------:|
+| ClientId      | int | Current connection client ID |
+| ObjectType    | string | Object type (Route, Mission etc...)      |
+| WithComposites | bool | ... |
+| WithCompositesSpecified | bool | ... |
+| AcquireLock | bool | ... |
+| AcquireLockSpecified | bool | ... |
+
+
 ```C#
 CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()
 {
