@@ -20,3 +20,7 @@ CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()
     AcquireLock = false
 };
 ```
+CreateOrUpdateObjectResponse
+```C#
+Executor.Submit<CreateOrUpdateObjectResponse>(requestSave);
+```
