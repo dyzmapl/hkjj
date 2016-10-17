@@ -1,6 +1,7 @@
 | Property     | Type | Description | Required |
 |:------------- |:-------------|:----- |:-----|
 | ClientId      | int | Current connection client ID | Yes 
+| Object   | DomainObjectWrapper | ....      | Yes 
 | ObjectType    | string | Object type (Route, Mission etc...)      | Yes 
 | WithComposites | bool | ... | No 
 | WithCompositesSpecified | bool | ... | No 
