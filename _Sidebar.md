@@ -1,6 +1,6 @@
 Request Message Types
 <ul>
-<li><a href="https://github.com/ugcs/ugcs-dotnet-sdk/wiki/CreateOrUpdateObjectRequest">CreateOrUpdateObjectRequest</a></li>
+<li><a href="https://github.com/ugcs/ugcs-dotnet-sdk/wiki/CreateOrUpdateObjectRequest-Response">CreateOrUpdateObjectRequest</a></li>
 <li><a href="https://github.com/ugcs/ugcs-dotnet-sdk/wiki/OperationStreamRequest">OperationStreamRequest</a></li>
 <li><a href="https://github.com/ugcs/ugcs-dotnet-sdk/wiki/CancelOperationRequest">CancelOperationRequest</a></li>
 <li><a href="https://github.com/ugcs/ugcs-dotnet-sdk/wiki/GetObjectListRequest">GetObjectListRequest</a></li>
