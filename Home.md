@@ -33,9 +33,9 @@ Typically you will use requests/responses to make standard CRUD operations and t
 Subscriptions are useful to listen for some events. For example if you want to get telemetry stream for the vehicle you typically subscribe to telemetry events. It is more appropriate way comparing to setting timer on the client and pulling UCS every N seconds.  
  
 ## Connecting to UGCS Server
-Establishing connection to UGCS Server is the first step to be performed. It consists of the following main operations:
-1. establishing TCP connection;
-1. authorizing client session
+Establishing connection to UGCS Server is the first step to be performed. It consists of the following main operations:  
+1. establishing TCP connection;  
+2. authorizing client session.  
 
 Create instance of TcpClient class and pass host and port as parameters. If UgCS Server is running on the same computer then specify “localhost” for a host and 3334 as a port number.
 
