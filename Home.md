@@ -1,5 +1,6 @@
 # Overview
 UgCS .Net SDK gives access to core services of our Universal Control Server. Using this SDK it is possible to develop third party client applications that can programmatically:
+
 •	access various UgCS entities like missions, routes, vehicles, vehicle profiles, payloads, telemetry, etc;  
 •	subscribe to notifications like telemetry, vehicle connection, routes change, ads-b collision, etc;  
 •	issue commands to vehicles;  
