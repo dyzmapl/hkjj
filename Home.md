@@ -133,7 +133,7 @@ This example shows how to delete vehicle on the server.
             ObjectType = "VehicleProfile"  
         });  
   
-   GetObjectListResponse listResp = listFuture.Value;  
+    GetObjectListResponse listResp = listFuture.Value;  
 
 Response object contains data in Objects property. Each object is of DomainObjectWrapper type. Wrapper has a lot of properties for different object types. In this case we need VehicleProfile property. Each profile stores it’s parameters in Parameters collection. 
 
