@@ -228,7 +228,7 @@ One more important things to note is that in the sample above we use Posix time.
 Note: telemetry recording is disabled in UgCS for Emulator by default. For development purposes is convenient to switch it on. To do that open <UgCS Installation Dir>\Server\ucs\ucs.properties and change field ucs.emulator.storeTelemetry=true.
 
 ##Subscriptions  
-###Vehicle subscription.  
+###Vehicle subscription  
 Function below initiates vehicle subscription.  
 
     public void SubscribeVehicle(ObjectModificationSubscription es)  
@@ -274,3 +274,152 @@ Function describes how to subscribe telemetry
         _notificationListener.AddSubscription(st);         
     }  
 
+##Working with routes
+###Create new route  
+
+    Route route = new Route  
+    {  
+        CreationTime = 123456789,  
+        Name = "Route name",  
+        Mission = mission  
+    };  
+    ChangeRouteVehicleProfileRequest request = new ChangeRouteVehicleProfileRequest  
+    {  
+        ClientId = 1,  
+        Route = route,  
+        NewProfile = new VehicleProfile { Id = 1 }  
+    };  
+    MessageFuture<ChangeRouteVehicleProfileResponse> future =  
+        Executor.Submit<ChangeRouteVehicleProfileResponse>(request);  
+    future.Wait();  
+    route = future.Value.Route;  
+    route.HomeLocationSource = HomeLocationSource.HLS_FIRST_WAYPOINT;  
+    route.TrajectoryType = TrajectoryType.TT_STAIR;  
+    route.AltitudeType = AltitudeType.AT_AGL;  
+    route.MaxAltitude = 50.0;  
+    route.SafeAltitude = 3.0;  
+    route.CheckAerodromeNfz = false;  
+    route.CheckAerodromeNfzSpecified = true;  
+    route.InitialSpeed = 0.0;  
+    route.MaxSpeed = 0.0;  
+    route.CheckCustomNfz = false;  
+    route.CheckCustomNfzSpecified = true;  
+    route.Failsafes.Add(new Failsafe()  
+    {  
+        Action = FailsafeAction.FA_GO_HOME,  
+        ActionSpecified = true,  
+        Reason = FailsafeReason.FR_RC_LOST,  
+        ReasonSpecified = true  
+    });  
+    route.Failsafes.Add(new Failsafe()  
+    {  
+        Action = FailsafeAction.FA_LAND,  
+        ActionSpecified = true,  
+        Reason = FailsafeReason.FR_LOW_BATTERY,  
+        ReasonSpecified = true  
+    });  
+    route.Failsafes.Add(new Failsafe()  
+    {  
+        Action = FailsafeAction.FA_WAIT,  
+        ActionSpecified = true,  
+        Reason = FailsafeReason.FR_GPS_LOST,  
+        ReasonSpecified = true  
+    });  
+    route.Failsafes.Add(new Failsafe()  
+    {  
+        Action = FailsafeAction.FA_GO_HOME,  
+        ActionSpecified = true,  
+        Reason = FailsafeReason.FR_DATALINK_LOST,  
+        ReasonSpecified = true  
+    });  
+    CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()  
+    {  
+        ClientId = 1,  
+        Object = new DomainObjectWrapper().Put(route, "Route"),  
+        WithComposites = true,  
+        ObjectType = "Route",  
+        AcquireLock = false  
+    };  
+    var task = Executor.Submit<CreateOrUpdateObjectResponse>(request);  
+
+###Add waypoint to route
+
+    SegmentDefinition newSegment = new SegmentDefinition  
+    {  
+        Uuid = Guid.NewGuid().ToString(),  
+        AlgorithmClassName = "com.ugcs.ucs.service.routing.impl.WaypointAlgorithm"  
+    };  
+    newSegment.Figure = new Figure { Type = FigureType.FT_POINT };  
+    newSegment.ParameterValues.Add(new ParameterValue()  
+    {  
+        Name = "speed",  
+        Value = "5.0",  
+        ValueSpecified = true  
+    });  
+    newSegment.ParameterValues.Add(new ParameterValue()  
+    {  
+        Name = "wpTurnType",  
+        Value = "SPLINE",  
+        ValueSpecified = true  
+    });  
+    newSegment.ParameterValues.Add(new ParameterValue()  
+    {  
+         Name = "avoidObstacles",  
+         Value = "True",  
+         ValueSpecified = true  
+    });  
+    newSegment.ParameterValues.Add(new ParameterValue()  
+    {  
+        Name = "avoidTerrain",  
+        Value = "True",  
+        ValueSpecified = true  
+    });  
+    newSegment.Figure.Points.Add(new FigurePoint()  
+    {  
+        AglAltitude = 20,  
+        AglAltitudeSpecified = true,  
+        AltitudeType = AltitudeType.AT_AGL,  
+        AltitudeTypeSpecified = true,  
+        Latitude = 0.99443566874164979f,  
+        LatitudeSpecified = true,  
+        Longitude = 0.42015588448045021f,  
+        LongitudeSpecified = true,  
+        Order = 0,  
+        Wgs84Altitude = 0.0,  
+        Wgs84AltitudeSpecified = true  
+    });  
+    route.Segments.Insert(0, newSegment);  
+
+###Calculating the route  
+
+Function receive prepared route and gives back ProcessedRoute
+
+    public ProcessedRoute CalculateRoute(Route route)  
+    {  
+        var updatedRoute = GetUpdatedRouteById(routeId);  
+        ProcessRouteRequest request = new ProcessRouteRequest  
+        {  
+            ClientId = clientId,  
+            Route = route  
+        };  
+        MessageFuture<ProcessRouteResponse> task = executor.Submit<ProcessRouteResponse>(request);  
+        task.Wait();  
+        return task.Value.ProcessedRoute;  
+    }  
+
+###Uploading the route  
+
+Function receives ProcessedRoute and Vehicle as parameter and upload processed route to vehicle.
+
+    public void UploadRoute(ProcessedRoute route, Vehicle vehicle)  
+    {  
+        UploadRouteRequest request = new UploadRouteRequest  
+        {  
+            ClientId = clientId,  
+            ProcessedRoute = route,  
+            Vehicle = vehicle,  
+        };  
+        MessageFuture<UploadRouteResponse> task = _connect.Executor.Submit<UploadRouteResponse>(request);  
+        task.Wait();  
+    }  
+ 
