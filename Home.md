@@ -45,18 +45,17 @@ To test your application you need UgCS Server running. Check that clicking UgCS 
  
 Compile and run that simple application. If client object instantiated successfully than you may find your session object in client.Session property.
 
-The next step is to get clientID. ClientID is a thing that you must specify for every request towards UgCS Server. But before that we need to prepare some code for sending and receiving messages.
+The next step is to get clientID. ClientID is a thing that you must specify for every request towards UgCS Server. But before that we need to prepare some code for sending and receiving messages.  
 
-            MessageFuture<AuthorizeHciResponse> authFuture =  
-                executor.Submit<AuthorizeHciResponse>(new AuthorizeHciRequest  
-            {  
-                ClientId = -1,  
-                Locale = "en-US",  
-            }  
-            );  
-            AuthorizeHciResponse authResp = authFuture.Value;  
-            int clientID = authResp.ClientId;  
-
+    MessageFuture<AuthorizeHciResponse> authFuture =  
+        executor.Submit<AuthorizeHciResponse>(new AuthorizeHciRequest  
+        {  
+            ClientId = -1,  
+            Locale = "en-US",  
+        }  
+        );  
+    AuthorizeHciResponse authResp = authFuture.Value;  
+    int clientID = authResp.ClientId;  
 
 What we do here is just sending AuthorizeHciRequest to UgCS Server. Request has to parameters: 
 * ClientID and we set it to default -1 value;
@@ -65,15 +64,14 @@ What we do here is just sending AuthorizeHciRequest to UgCS Server. Request has 
 Another important thing to note is how we get response from the UgCS Server. We employ future (or promise) concept here for asynchronous communication.  Typically this means that you submit some response , specify callback and do not wait for response doing something. But here we explicitly wait for response invoking Value property of authFuture object. That is a general approach for making pseudo-synchronous requests/responses.    
 We are almost ready to do something really useful.  The only thing that has to be done is to login into the system. UgCS Server uses login based authentication model. Look at the source code:
 
-             MessageFuture<LoginResponse> loginFuture =  
-                executor.Submit<LoginResponse>(new LoginRequest  
-             {  
-                    ClientId = clientId,  
-                    UserLogin = login,  
-                    UserPassword = password  
-            });  
-            LoginResponse loginResp = loginFuture.Value; 
-
+    MessageFuture<LoginResponse> loginFuture =  
+        executor.Submit<LoginResponse>(new LoginRequest  
+        {  
+            ClientId = clientId,  
+            UserLogin = login,  
+            UserPassword = password  
+        });  
+    LoginResponse loginResp = loginFuture.Value; 
  
 It is pretty straightforward. Note that we use clientID as an argument to LoginRequest. The only question is how to deal with login and password. Generally you must specify login and password from user list. But there is a trick. If you have only one user registered then you can put empty strings and SDK will try to make autologin. 
 That’s it. Now we are logged in into UGCS server and can do something.
@@ -83,24 +81,24 @@ That’s it. Now we are logged in into UGCS server and can do something.
 **List**
 This example shows how to get vehicle list from the server. First of all we need find appropriate request/response pair. There is a universal operation for getting object lists called GetObjectList. It works similar for many objects. You need to specify clientId and ObjectType. In our case object type is “Vehicle”
 
-            MessageFuture<GetObjectListResponse> vehicleFuture =  
-                executor.Submit<GetObjectListResponse>(  
-                new GetObjectListRequest  
-                {  
-                    ClientId = clientId,  
-                    ObjectType = "Vehicle"  
-                });  
-            GetObjectListResponse vehicleListResp = vehicleFuture.Value;  
+    MessageFuture<GetObjectListResponse> vehicleFuture =  
+        executor.Submit<GetObjectListResponse>(  
+        new GetObjectListRequest  
+        {  
+             ClientId = clientId,  
+             ObjectType = "Vehicle"  
+        });  
+    GetObjectListResponse vehicleListResp = vehicleFuture.Value;  
  
 Nothing new in this sample. And we did a half of the job. Now we need to access vehicle data itself. Response object contains a lot of general properties and some specific ones. Actual data resides in Objects collection. So to list vehicles we can use the following code:
 
-            foreach (DomainObjectWrapper v in vehicleListResp.Objects)  
-            {  
-                Console.WriteLine(string.Format("name: {0}; id: {1}; type: {2}",  
-                    v.Vehicle.Name, v.Vehicle.Id, v.Vehicle.Type.ToString()));  
-            }  
+    foreach (DomainObjectWrapper v in vehicleListResp.Objects)  
+    {  
+        Console.WriteLine(string.Format("name: {0}; id: {1}; type: {2}",  
+            v.Vehicle.Name, v.Vehicle.Id, v.Vehicle.Type.ToString()));  
+    }  
 
-**Update**
+**Update**  
 This example shows how to update vehicle on the server.
 
     CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()  
@@ -113,7 +111,7 @@ This example shows how to update vehicle on the server.
     };  
     var task = executor.Submit<CreateOrUpdateObjectResponse>(request);  
 
-**Delete**
+**Delete**  
 This example shows how to delete vehicle on the server.
 
     DeleteObjectRequest request = new DeleteObjectRequest()  
@@ -125,7 +123,7 @@ This example shows how to delete vehicle on the server.
     var task = _connect.Executor.Submit<DeleteObjectResponse>(request);    
 
 ### Vehicle profile
-**List**
+**List**  
     MessageFuture<GetObjectListResponse> listFuture =  
         executor.Submit<GetObjectListResponse>(  
         new GetObjectListRequest  
@@ -138,17 +136,17 @@ This example shows how to delete vehicle on the server.
 
 Response object contains data in Objects property. Each object is of DomainObjectWrapper type. Wrapper has a lot of properties for different object types. In this case we need VehicleProfile property. Each profile stores it’s parameters in Parameters collection. 
 
-**Create**
+**Create**  
 TODO
 
-**Update**
+**Update**  
 TODO
 
-**Delete**
+**Delete**  
 TODO
 
-###Payloads
-**List**
+###Payloads  
+**List**  
     MessageFuture<GetObjectListResponse> listFuture =  
         executor.Submit<GetObjectListResponse>(  
         new GetObjectListRequest  
@@ -161,17 +159,17 @@ TODO
 
 Response object contains data in Objects property. Each object is of DomainObjectWrapper type. Wrapper has a lot of properties for different object types. In this case we need PayloadProfile property. Each profile stores it’s parameters in Parameters collection. 
 
-**Create**
-TODO
+**Create**  
+TODO  
 
-**Update**
-TODO
+**Update**  
+TODO  
 
-**Delete**
-TODO
+**Delete**  
+TODO  
 
-### Missions
-**Create mission**
+### Missions  
+**Create mission**  
 
     Mission mission = new Mission  
     {  
@@ -190,8 +188,8 @@ TODO
     };  
     var task = executor.Submit<CreateOrUpdateObjectResponse>(request);  
 
-## Accessing telemetry storage
-Here is a sample of telemetry request to obtain telemetry for the last hour. Not that we specify vehicle object (see Vehicles sample) as a parameter. Another important parameters are ToTime and FromTime – time interval.  Limit defines maximum number of telemetry records to be fetched. Zero means no limit.
+## Accessing telemetry storage  
+Here is a sample of telemetry request to obtain telemetry for the last hour. Not that we specify vehicle object (see Vehicles sample) as a parameter. Another important parameters are ToTime and FromTime – time interval.  Limit defines maximum number of telemetry records to be fetched. Zero means no limit.  
 
     MessageFuture<GetTelemetryResponse> telemetryFuture = executor  
         .Submit<GetTelemetryResponse>(new GetTelemetryRequest  
@@ -210,7 +208,8 @@ Here is a sample of telemetry request to obtain telemetry for the last hour. Not
 
 Response object contains data in Telemetry property. Each object is of TelemetryDto type. Field “Type” contains field type, “Value” contains value and “Time” is a time.
 
-One more important things to note is that in the sample above we use Posix time. In the future releases of SDK we will include these functions in our SDK. But you can use the following code instead for now:
+One more important things to note is that in the sample above we use Posix time. In the future releases of SDK we will include these functions in our SDK. But you can use the following code instead for now:  
+
     public static long ToPosixMilliseconds(this DateTime localTime)  
     {  
         DateTime utcTime = localTime.ToUniversalTime();  
