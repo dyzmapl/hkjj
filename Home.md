@@ -227,4 +227,50 @@ One more important things to note is that in the sample above we use Posix time.
 
 Note: telemetry recording is disabled in UgCS for Emulator by default. For development purposes is convenient to switch it on. To do that open <UgCS Installation Dir>\Server\ucs\ucs.properties and change field ucs.emulator.storeTelemetry=true.
 
+##Subscriptions  
+###Vehicle subscription.  
+Function below initiates vehicle subscription.  
+
+    public void SubscribeVehicle(ObjectModificationSubscription es)  
+    {  
+        _objectNotificationSubscription = es;  
+        _eventSubscriptionWrapper.ObjectModificationSubscription = _objectNotificationSubscription;  
+        SubscribeEventRequest requestEvent = new SubscribeEventRequest();  
+        requestEvent.ClientId = clientId;  
+        requestEvent.Subscription = _eventSubscriptionWrapper; //Subscription Wrapper  
+        var responce = _connect.Executor.Submit<SubscribeEventResponse>(requestEvent);    
+        var subscribeEventResponse = responce.Value;  
+        SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId,     
+             _getObjectNotificationHandler<Vehicle>(  
+             (token, exception, vehicle) =>  
+             {  
+                //Recieve modificated vehcile object  
+             }  
+             ), _eventSubscriptionWrapper);  
+        tokens.Add(st);  
+     }  
+
+###Telemetry subscription  
+ 
+Function describes how to subscribe telemetry  
+
+    public void SubscribeTelemtry()   
+    {  
+        _eventSubscriptionWrapper.TelemetrySubscription = _telemetrySubscription;  
+        SubscribeEventRequest requestEvent = new SubscribeEventRequest();  
+        requestEvent.ClientId = _connect.AuthorizeHciResponse.ClientId;  
+        requestEvent.Subscription = _eventSubscriptionWrapper;  
+        var responce = _connect.Executor.Submit<SubscribeEventResponse>(requestEvent);  
+        var subscribeEventResponse = responce.Value;  
+        SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId,                  
+            _getTelemetryNotificationHandler(  
+            (vehicleId, telemetry) =>  
+            {  
+                //Place where recieve telemetry  
+            }
+            ), _eventSubscriptionWrapper);  
+
+        //NotificationListener object  
+        _notificationListener.AddSubscription(st);         
+    }  
 
