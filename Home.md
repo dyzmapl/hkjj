@@ -124,6 +124,7 @@ This example shows how to delete vehicle on the server.
 
 ### Vehicle profile
 **List**  
+
     MessageFuture<GetObjectListResponse> listFuture =  
         executor.Submit<GetObjectListResponse>(  
         new GetObjectListRequest  
@@ -147,6 +148,7 @@ TODO
 
 ###Payloads  
 **List**  
+
     MessageFuture<GetObjectListResponse> listFuture =  
         executor.Submit<GetObjectListResponse>(  
         new GetObjectListRequest  
