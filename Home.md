@@ -1,5 +1,5 @@
 # Overview
-UgCS .Net SDK gives access to core services of our Universal Control Server. Using this SDK it is possible to develop third party client applications that can programmatically:  
+UgCS .Net SDK gives access to core services of our Universal Control Server starting from version 2.10. Using this SDK it is possible to develop third party client applications that can programmatically:  
 •	access various UgCS entities like missions, routes, vehicles, vehicle profiles, payloads, telemetry, etc;  
 •	subscribe to notifications like telemetry, vehicle connection, routes change, ads-b collision, etc;  
 •	issue commands to vehicles;  
@@ -123,3 +123,107 @@ This example shows how to delete vehicle on the server.
         ObjectType = "Vehicle"  
     };  
     var task = _connect.Executor.Submit<DeleteObjectResponse>(request);    
+
+### Vehicle profile
+**List**
+    MessageFuture<GetObjectListResponse> listFuture =  
+        executor.Submit<GetObjectListResponse>(  
+        new GetObjectListRequest  
+        {  
+            ClientId = clientId,  
+            ObjectType = "VehicleProfile"  
+        });  
+  
+   GetObjectListResponse listResp = listFuture.Value;  
+
+Response object contains data in Objects property. Each object is of DomainObjectWrapper type. Wrapper has a lot of properties for different object types. In this case we need VehicleProfile property. Each profile stores it’s parameters in Parameters collection. 
+
+**Create**
+TODO
+
+**Update**
+TODO
+
+**Delete**
+TODO
+
+###Payloads
+**List**
+    MessageFuture<GetObjectListResponse> listFuture =  
+        executor.Submit<GetObjectListResponse>(  
+        new GetObjectListRequest  
+        {  
+             ClientId = clientId,  
+             ObjectType = "PayloadProfile"  
+        });  
+
+    GetObjectListResponse listResp = listFuture.Value;  
+
+Response object contains data in Objects property. Each object is of DomainObjectWrapper type. Wrapper has a lot of properties for different object types. In this case we need PayloadProfile property. Each profile stores it’s parameters in Parameters collection. 
+
+**Create**
+TODO
+
+**Update**
+TODO
+
+**Delete**
+TODO
+
+### Missions
+**Create mission**
+
+    Mission mission = new Mission  
+    {  
+        CreationTime = 1270011748,  
+        Name = "Mission name",  
+        Owner = user  
+    };  
+
+    CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()  
+    {  
+        ClientId = 1,  
+        Object = new DomainObjectWrapper().Put(mission, "Mission"),  
+        WithComposites = true,  
+        ObjectType = "Mission",  
+        AcquireLock = false  
+    };  
+    var task = executor.Submit<CreateOrUpdateObjectResponse>(request);  
+
+## Accessing telemetry storage
+Here is a sample of telemetry request to obtain telemetry for the last hour. Not that we specify vehicle object (see Vehicles sample) as a parameter. Another important parameters are ToTime and FromTime – time interval.  Limit defines maximum number of telemetry records to be fetched. Zero means no limit.
+
+    MessageFuture<GetTelemetryResponse> telemetryFuture = executor  
+        .Submit<GetTelemetryResponse>(new GetTelemetryRequest  
+    {  
+        ClientId = authResp.ClientId,  
+        Vehicle = vehicleListResp.Objects[0].Vehicle,  
+        ToTime = DateTimeUtilities.ToPosixMilliseconds(DateTime.Now),  
+        FromTime =  DateTimeUtilities.ToPosixMilliseconds(  
+            DateTime.Now.Subtract(new TimeSpan(1,0,0))),  
+        Limit = 0,  
+        LimitSpecified = true,  
+        ToTimeSpecified = true  
+    });  
+
+    GetTelemetryResponse telemetryResp = telemetryFuture.Value;  
+
+Response object contains data in Telemetry property. Each object is of TelemetryDto type. Field “Type” contains field type, “Value” contains value and “Time” is a time.
+
+One more important things to note is that in the sample above we use Posix time. In the future releases of SDK we will include these functions in our SDK. But you can use the following code instead for now:
+    public static long ToPosixMilliseconds(this DateTime localTime)  
+    {  
+        DateTime utcTime = localTime.ToUniversalTime();  
+        TimeSpan span = utcTime - PosixEpoch;  
+        return (long)span.TotalMilliseconds;  
+    }  
+
+    public static DateTime FromPosixMilliseconds(long milliseconds)  
+    {  
+        TimeSpan span = TimeSpan.FromMilliseconds(milliseconds);  
+        return (PosixEpoch + span).ToLocalTime();  
+    }  
+
+Note: telemetry recording is disabled in UgCS for Emulator by default. For development purposes is convenient to switch it on. To do that open <UgCS Installation Dir>\Server\ucs\ucs.properties and change field ucs.emulator.storeTelemetry=true.
+
+
