@@ -43,8 +43,8 @@ Open Visual Studio and select on of possible C# projects. To use SDK you have to
 
 After successful download the following references shall appear in your project:
 
-- -.Sdk.dll
-- -.Protobuf-net.dll
+- Sdk.dll
+- Protobuf-net.dll
 
 We use protobuf as a container for our messages so SDK uses it as a dependency.
 
@@ -61,8 +61,8 @@ using ProtoBuf;
 
 There are two ways of communication between client application and UGCS Server:
 
-- -.asynchronous request/ response;
-- -.subscription.
+- asynchronous request/ response;
+- subscription.
 
 Though all communication is asynchronous there are certain ways to implement synchronous workflow on the client.
 
@@ -108,8 +108,8 @@ int clientId = AuthorizeHciResponse.ClientId
 
 What we do here is just sending AuthorizeHciRequest to UgCS Server. Request has to parameters:
 
-- -.ClientID and we set it to default -1 value;
-- -.Locale – client locale (optional), en-US by default here. Local defines localization for strings that UgCS Server sends to client.
+- ClientID and we set it to default -1 value;
+- Locale – client locale (optional), en-US by default here. Local defines localization for strings that UgCS Server sends to client.
 
 Another important thing to note is how we get response from the UgCS Server. We employ future (or promise) concept here for asynchronous communication.  Typically this means that you submit some response , specify callback and do not wait for response doing something. But here we explicitly wait for response invoking Value property of authFuture object. That is a general approach for making pseudo-synchronous requests/responses.
 
