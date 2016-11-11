@@ -382,40 +382,40 @@ public static DateTime FromPosixMilliseconds(long milliseconds)
 Code below initiates vehicle subscription.
 
 ```C#
-ObjectModificationSubscription _objectNotificationSubscription;
-    _eventSubscriptionWrapper.ObjectModificationSubscription = _objectNotificationSubscription;
+var eventSubscriptionWrapper = new EventSubscriptionWrapper();
+eventSubscriptionWrapper.ObjectModificationSubscription = new ObjectModificationSubscription();
+eventSubscriptionWrapper.ObjectModificationSubscription.ObjectId = vehicle.Id;
+eventSubscriptionWrapper.ObjectModificationSubscription.ObjectType = "Vehicle";
 SubscribeEventRequest requestEvent = new SubscribeEventRequest();
 requestEvent.ClientId = clientId;
-requestEvent.Subscription = _eventSubscriptionWrapper; //Subscription Wrapper
-var responce = _connect.Executor.Submit<SubscribeEventResponse>(requestEvent);
+requestEvent.Subscription = eventSubscriptionWrapper;
+var responce = messageExecutor.Submit<SubscribeEventResponse>(requestEvent);
 var subscribeEventResponse = responce.Value;
-SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId, _getObjectNotificationHandler<Vehicle>(
-    (token, exception, vehicle) =>
+SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId, (
+    (notification) =>
     {
-        //Recieve modificated vehcile object
+        //Recieve notification
     }
-), _eventSubscriptionWrapper);
-tokens.Add(st);    
+), eventSubscriptionWrapper); 
 ```
 
 ### Telemetry subscription.
 Code describes how to subscribe telemetry
 
 ```C#
-SubscribeEventRequest requestEvent = new SubscribeEventRequest();
-requestEvent.ClientId = _connect.AuthorizeHciResponse.ClientId;
-requestEvent.Subscription = _eventSubscriptionWrapper;
-var responce = _connect.Executor.Submit<SubscribeEventResponse>(requestEvent);
+var telemetrySubscriptionWrapper = new EventSubscriptionWrapper();
+telemetrySubscriptionWrapper.TelemetrySubscription = new TelemetrySubscription();
+SubscribeEventRequest requestTelemetryEvent = new SubscribeEventRequest();
+requestEvent.ClientId = clientId;
+requestEvent.Subscription = telemetrySubscriptionWrapper;
+var responce = messageExecutor.Submit<SubscribeEventResponse>(requestEvent);
 var subscribeEventResponse = responce.Value;
-SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId,              _getTelemetryNotificationHandler(
-    (vehicleId, telemetry) =>
+SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId, (
+    (notification) =>
     {
-        //Place where recieve telemetry.
+        //Recieve notification
     }
-), _eventSubscriptionWrapper);
-
-//NotificationListener object
-_notificationListener.AddSubscription(st); 
+), telemetrySubscriptionWrapper);
 ```
 
 ## Working with routes
