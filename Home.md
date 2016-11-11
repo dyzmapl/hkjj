@@ -99,7 +99,7 @@ Compile and run that simple application. If client object instantiated successfu
 The next step is to get clientID. ClientID is a thing that you must specify for every request towards UgCS Server. But before that we need to prepare some code for sending and receiving messages.
 
 ```C#
-AuthorizeHciRequest request = newAuthorizeHciRequest();
+AuthorizeHciRequest request = new AuthorizeHciRequest();
 AuthorizeHciRequest request = new AuthorizeHciRequest();
 request.ClientId = -1;
 request.Locale = "en-US";
