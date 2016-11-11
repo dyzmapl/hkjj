@@ -84,10 +84,12 @@ Establishing connection to UGCS Server is the first step to be performed. It con
 Create instance of TcpClient class and pass host and port as parameters. If UgCS Server is running on the same computer then specify &quot;localhost&quot; for a host and 3334 as a port number.
 ```C#
 TcpClient tcpClient = new TcpClient("localhost", 3334);
-MessageSender messageSender = new MessageSender(tcpClient.Session);            
-MessageReceiver messageReceiver = new MessageReceiver(tcpClient.Session);           
+MessageSender messageSender = new MessageSender(tcpClient.Session);
+MessageReceiver messageReceiver = new MessageReceiver(tcpClient.Session);
 MessageExecutor messageExecutor = new MessageExecutor(messageSender, messageReceiver, new InstantTaskScheduler());
 messageExecutor.Configuration.DefaultTimeout = 10000;
+var notificationListener = new NotificationListener();
+messageReceiver.AddListener(-1, notificationListener);
 ```
 
 To test your application you need UgCS Server running. Check that clicking UgCS icon in tray.
@@ -100,13 +102,12 @@ The next step is to get clientID. ClientID is a thing that you must specify for 
 
 ```C#
 AuthorizeHciRequest request = new AuthorizeHciRequest();
-AuthorizeHciRequest request = new AuthorizeHciRequest();
 request.ClientId = -1;
 request.Locale = "en-US";
 var future = messageExecutor.Submit<AuthorizeHciResponse>(request);
 future.Wait();
 AuthorizeHciResponse AuthorizeHciResponse = future.Value;
-int clientId = AuthorizeHciResponse.ClientId;
+int clientId = AuthorizeHciResponse.ClientId
 ```
 
 What we do here is just sending AuthorizeHciRequest to UgCS Server. Request has to parameters:
@@ -123,7 +124,8 @@ LoginRequest loginRequest = new LoginRequest();
 loginRequest.UserLogin = "admin";
 loginRequest.UserPassword = "admin";
 loginRequest.ClientId = clientId;
-LoginResponse LoginResponce = messageExecutor.Submit<LoginResponse>(loginRequest).Value;
+var loginResponcetask = messageExecutor.Submit<LoginResponse>(loginRequest);
+loginResponcetask.Wait();
 ```
 
 It is pretty straightforward. Note that we use clientID as an argument to LoginRequest. The only question is how to deal with login and password. Generally you must specify login and password from user list. But there is a trick. If you have only one user registered then you can put empty strings and SDK will try to make autologin.
@@ -139,26 +141,27 @@ That&#39;s it. Now we are logged in into UGCS server and can do something.
 This example shows how to get vehicle list from the server. First of all we need find appropriate request/response pair. There is a universal operation for getting object lists called GetObjectList. It works similar for many objects. You need to specify clientId and ObjectType. In our case object type I &quot;Vehicle&quot;
 
 ```C#
-GetObjectListRequest request = new GetObjectListRequest()
+GetObjectListRequest getObjectListRequest = new GetObjectListRequest()
 {
-    ClientId = clientId,
-    ObjectType = "Vehicle",
-    RefreshDependencies = true
+	ClientId = clientId,
+	ObjectType = "Vehicle",
+	RefreshDependencies = true
 };
-request.RefreshExcludes.Add("Avatar");
-request.RefreshExcludes.Add("PayloadProfile");
-request.RefreshExcludes.Add("Route");
-var task = messageExecutor.Submit<GetObjectListResponse>(request);
+getObjectListRequest.RefreshExcludes.Add("Avatar");
+getObjectListRequest.RefreshExcludes.Add("PayloadProfile");
+getObjectListRequest.RefreshExcludes.Add("Route");
+var task = messageExecutor.Submit<GetObjectListResponse>(getObjectListRequest);
+task.Wait();
 ```
 
 Nothing new in this sample. And we did a half of the job. Now we need to access vehicle data itself. Response object contains a lot of general properties and some specific ones. Actual data resides in Objects collection. So to list vehicles we can use the following code:
 
 ```C#
 var list = task.Value;
-foreach (var vehicle in list.Objects)
+foreach (var v in list.Objects)
 {
-    Console.WriteLine(string.Format("name: {0}; id: {1}; type: {2}",
-           vehicle.Vehicle.Name, vehicle.Vehicle.Id, vehicle.Vehicle.Type.ToString()));
+	System.Console.WriteLine(string.Format("name: {0}; id: {1}; type: {2}",
+		   v.Vehicle.Name, v.Vehicle.Id, v.Vehicle.Type.ToString()));
 }
 Vehicle vehicle = task.Value.Objects.FirstOrDefault().Vehicle;
 ```
@@ -168,15 +171,16 @@ Vehicle vehicle = task.Value.Objects.FirstOrDefault().Vehicle;
 This example shows how to update vehicle on the server.
 
 ```C#
-CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()
+CreateOrUpdateObjectRequest createOrUpdateObjectRequest = new CreateOrUpdateObjectRequest()
 {
-    ClientId = clientId,
-    Object = new DomainObjectWrapper().Put(vehicle, "Vehicle"),
-    WithComposites = true,
-    ObjectType = "Vehicle",
-    AcquireLock = false
+	ClientId = clientId,
+	Object = new DomainObjectWrapper().Put(vehicle, "Vehicle"),
+	WithComposites = true,
+	ObjectType = "Vehicle",
+	AcquireLock = false
 };
-var task = messageExecutor.Submit<CreateOrUpdateObjectResponse>(request);
+var createOrUpdateObjectResponseTask = messageExecutor.Submit<CreateOrUpdateObjectResponse>(createOrUpdateObjectRequest);
+createOrUpdateObjectResponseTask.Wait();
 ```
 
 #### Delete
@@ -390,13 +394,15 @@ SubscribeEventRequest requestEvent = new SubscribeEventRequest();
 requestEvent.ClientId = clientId;
 requestEvent.Subscription = eventSubscriptionWrapper;
 var responce = messageExecutor.Submit<SubscribeEventResponse>(requestEvent);
+responce.Wait();
 var subscribeEventResponse = responce.Value;
 SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId, (
-    (notification) =>
-    {
-        //Recieve notification
-    }
-), eventSubscriptionWrapper); 
+	(notification) =>
+	{
+		//Vehicle notification
+	}
+), eventSubscriptionWrapper);
+notificationListener.AddSubscription(st);
 ```
 
 ### Telemetry subscription.
@@ -406,16 +412,21 @@ Code describes how to subscribe telemetry
 var telemetrySubscriptionWrapper = new EventSubscriptionWrapper();
 telemetrySubscriptionWrapper.TelemetrySubscription = new TelemetrySubscription();
 SubscribeEventRequest requestTelemetryEvent = new SubscribeEventRequest();
-requestEvent.ClientId = clientId;
-requestEvent.Subscription = telemetrySubscriptionWrapper;
-var responce = messageExecutor.Submit<SubscribeEventResponse>(requestEvent);
-var subscribeEventResponse = responce.Value;
-SubscriptionToken st = new SubscriptionToken(subscribeEventResponse.SubscriptionId, (
-    (notification) =>
-    {
-        //Recieve notification
-    }
+requestTelemetryEvent.ClientId = clientId;
+requestTelemetryEvent.Subscription = telemetrySubscriptionWrapper;
+var responceTelemetry = messageExecutor.Submit<SubscribeEventResponse>(requestTelemetryEvent);
+responceTelemetry.Wait();
+var subscribeEventResponseTelemetry = responceTelemetry.Value;
+SubscriptionToken stTelemetry = new SubscriptionToken(subscribeEventResponseTelemetry.SubscriptionId, (
+	(notification) =>
+	{
+		foreach (var t in notification.Event.TelemetryEvent.Telemetry)
+		{
+			System.Console.WriteLine("Vehicle id: {0} Type: {1} Value {2}", t.Vehicle.Id, t.Type.ToString(), t.Value);
+		}
+	}
 ), telemetrySubscriptionWrapper);
+notificationListener.AddSubscription(stTelemetry);
 ```
 
 ## Working with routes
