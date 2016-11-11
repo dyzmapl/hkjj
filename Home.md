@@ -2,11 +2,11 @@
 
 UgCS .Net SDK gives access to core services of our Universal Control Server. Using this SDK it is possible to develop third party client applications that can programmatically:
 
-- .access various UgCS entities like missions, routes, vehicles, vehicle profiles, payloads, telemetry, etc;
-- .subscribe to notifications like telemetry, vehicle connection, routes change, ads-b collision, etc;
-- .issue commands to vehicles;
-- .calculate routes;
-- .access elevation data.
+- access various UgCS entities like missions, routes, vehicles, vehicle profiles, payloads, telemetry, etc;
+- subscribe to notifications like telemetry, vehicle connection, routes change, ads-b collision, etc;
+- issue commands to vehicles;
+- calculate routes;
+- access elevation data.
 
 SDK gives developer a way to implement a simple widget to display telemetry parameter or full functional drone control client application.
 
@@ -18,12 +18,8 @@ SDK gives developer a way to implement a simple widget to display telemetry para
 | 2.9 | 2016/05/01 | First public BETA compatible with UgCS 2.9 |
 | 2.10 | 2016/10/14 | SDK version with updated protobuf version |
 
-# Place of .Net SDK in UgCS architecture
-
-TODO
-
-- -.architecture
-- -.differences between One/Open/Pro
+# Example of C# code
+<a href="https://github.com/ugcs/ugcs-dotnet-sdk/blob/master/UGCS.Example/UGCS.Console/Program.cs" target="_blank">https://github.com/ugcs/ugcs-dotnet-sdk/blob/master/UGCS.Example/UGCS.Console/Program.cs</a>
 
 # Prerequisites
 
