@@ -134,7 +134,7 @@ That&#39;s it. Now we are logged in into UGCS server and can do something.
 
 #### List
 
-This example shows how to get vehicle list from the server. First of all we need find appropriate request/response pair. There is a universal operation for getting object lists called GetObjectList. It works similar for many objects. You need to specify clientId and ObjectType. In our case object type I &quot;Vehicle&quot;
+This example shows how to get vehicle list from the server. First of all we need find appropriate request/response pair. There is a universal operation for getting object lists called GetObjectList. It works similar for many objects. You need to specify clientId and ObjectType. In our case object type &quot;Vehicle&quot;
 
 ```C#
 GetObjectListRequest getObjectListRequest = new GetObjectListRequest()
@@ -663,7 +663,7 @@ request.Command.Arguments.AddRange(list);
 | --- | --- | --- |
 | Authorize client session | AuthorizeHciRequest/Response |   |
 | Login | LoginRequest/Response |   |
-| List objects | GetObjectsListRequest/Response | Works for different object types:<br />- Vehicle<br />- VehicleProfile<br />-…  |
+| List objects | GetObjectsListRequest/Response | Works for different object types:<br />- Vehicle<br />- VehicleProfile<br />- ... |
 
 # Protobuf messages
 
