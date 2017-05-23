@@ -287,8 +287,8 @@ var missionFromUcs = getMissionObjectResponse.Value.Object.Mission;
 
 ## Import route to server from xml
 Stept to import route:
-1) Import froute to client
-2) Add vehicle profile to route
+1) Import route to client from xml file
+2) Add vehicle profile to imported route
 3) Add mission to route
 4) Save route
 
