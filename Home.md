@@ -248,7 +248,40 @@ CreateOrUpdateObjectRequest request = new CreateOrUpdateObjectRequest()
 var task = messageExecutor.Submit<CreateOrUpdateObjectResponse>(request);
 ```
 
-### No-Fly Zones
+
+## Import mission from xml
+
+```C#
+var byteArray = File.ReadAllBytes("Demo mission.xml");
+ImportMissionFromXmlRequest importMissionRequest = new ImportMissionFromXmlRequest()
+{
+	ClientId = clientId,
+	MissionXml = byteArray
+};
+var importMissionResponse = messageExecutor.Submit<ImportMissionFromXmlResponse>(importMissionRequest);
+importMissionResponse.Wait();
+
+//importedMission contains imported mission from Demo mission.xml
+var importedMission = importMissionResponse.Value.Mission;
+```
+
+
+## Get mission from server
+
+```C#
+GetObjectRequest getMissionObjectRequest = new GetObjectRequest()
+{
+	ClientId = clientId,
+	ObjectType = "Mission",
+	ObjectId = importedMission.Id,
+	RefreshDependencies = true
+};
+var getMissionObjectResponse = messageExecutor.Submit<GetObjectResponse>(getMissionObjectRequest);
+getMissionObjectResponse.Wait();
+//missionFromUcs contains retrieved mission
+var missionFromUcs = getMissionObjectResponse.Value.Object.Mission;
+```
+
 
 ## Accessing telemetry storage
 
