@@ -283,6 +283,66 @@ var missionFromUcs = getMissionObjectResponse.Value.Object.Mission;
 ```
 
 
+### Routes
+
+## Import route to server from xml
+Stept to import route:<br>
+1) Import froute to client<br>
+2) Add vehicle profile to route<br>
+3) Add mission to route<br>
+4) Save route
+
+```C#
+var byteArrayRoute = File.ReadAllBytes("Demo route for Copter.xml");
+ImportRouteRequest importRouteRequest = new ImportRouteRequest()
+{
+	ClientId = clientId,
+	RouteData = byteArrayRoute,
+	Filename = "Demo route for Copter.xml"
+};
+var importRouteResponse = messageExecutor.Submit<ImportRouteResponse>(importRouteRequest);
+importRouteResponse.Wait();
+//importedRoute contains imported route from Demo route for Copter.xml
+var importedRoute = importRouteResponse.Value.Route;
+System.Console.WriteLine("Demo route for Copter.xml imported to UCS with name '{0}'", importedRoute.Name);
+//Add vehicle profile to route
+GetObjectRequest requestVehicle = new GetObjectRequest()
+{
+	ClientId = clientId,
+	ObjectType = "Vehicle",
+	ObjectId = 1, //EMU-COPTER-17
+	RefreshDependencies = true
+};
+var responseVehicle = messageExecutor.Submit<GetObjectResponse>(requestVehicle);
+responseVehicle.Wait();
+importedRoute.VehicleProfile = responseVehicle.Value.Object.Vehicle.Profile;
+//Add route to mission
+importedRoute.Mission = missionFromUcs;
+//Save route on server
+CreateOrUpdateObjectRequest routeSaveRequest = new CreateOrUpdateObjectRequest()
+{
+	ClientId = clientId,
+	Object = new DomainObjectWrapper().Put(importedRoute, "Route"),
+	WithComposites = true,
+	ObjectType = "Route",
+	AcquireLock = false
+};
+var updateRouteTask = messageExecutor.Submit<CreateOrUpdateObjectResponse>(routeSaveRequest);
+updateRouteTask.Wait();
+```
+## Get route from server
+GetObjectRequest getRouteObjectRequest = new GetObjectRequest()
+{
+	ClientId = clientId,
+	ObjectType = "Route",
+	ObjectId = updateRouteTask.Value.Object.Route.Id,
+	RefreshDependencies = true
+};
+var geRouteObjectResponse = messageExecutor.Submit<GetObjectResponse>(getRouteObjectRequest);
+geRouteObjectResponse.Wait();
+//routeFromUcs contains retrieved route
+var routeFromUcs = geRouteObjectResponse.Value.Object.Route;
+
 ## Accessing telemetry storage
 
 Here is a sample of telemetry request to obtain telemetry for the last hour. Not that we specify vehicle object (see Vehicles sample) as a parameter. Another important parameters are ToTime and FromTime – time interval.  Limit defines maximum number of telemetry records to be fetched. Zero means no limit.
