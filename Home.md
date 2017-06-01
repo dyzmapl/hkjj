@@ -15,8 +15,9 @@ SDK gives developer a way to implement a simple widget to display telemetry para
 | SDK version | Date | Description |
 | --- | --- | --- | 
 |   |   |   |
-| 2.9 | 2016/05/01 | First public BETA compatible with UgCS 2.9 |
-| 2.10 | 2016/10/14 | SDK version with updated protobuf version |
+| 2.11 (current master) | 2017/06/01 | SDK version compatible with latest UgCS version https://www.ugcs.com/en/page/download |
+| 2.10 | 2016/10/14 | SDK version with updated protobuf version compatible with https://www.ugcs.com/en/page/version-2-10 |
+
 
 # Example of C# code
 <a href="https://github.com/ugcs/ugcs-dotnet-sdk/blob/master/UGCS.Example/UGCS.Console/Program.cs" target="_blank">https://github.com/ugcs/ugcs-dotnet-sdk/blob/master/UGCS.Example/UGCS.Console/Program.cs</a>
@@ -29,7 +30,7 @@ Visual Studio 2013 Community Edition
 
 Nuget package manager (shall be a part of Visual Studio)
 
-Installed UgCS application, 2.10 or later
+Installed UgCS application, 2.10 or later. Please note that SDK release version should be the same as UgCS version https://www.ugcs.com/en/page/download 
 
 **Note** : number of allowed UgCS client connections to UGCS Server depends on the license type. For Open and One versions only one connection allowed. For Pro 3 and Enterprise is unlimeted. This means that for Open and One it is not possible to have UgCS standard client and your application running at the same time.
 
