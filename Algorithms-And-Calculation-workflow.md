@@ -6,7 +6,6 @@ A detailed description of the parameters and a description of the calculation fe
 - Area scan
 - Circle
 - Landing
-- LIDAR survey
 - Perimeter
 - Photogrammetry tool
 - Takeoff
@@ -14,12 +13,9 @@ A detailed description of the parameters and a description of the calculation fe
 
 # Area scan
 
-<table>
+<table style="font-size:11">
 <thead>
 <tr>
-<th>
-<div>Name</div>
-</th>
 <th>
 <div>Name in UCS</div>
 </th>
@@ -29,31 +25,20 @@ A detailed description of the parameters and a description of the calculation fe
 <th>
 <div>Purpose</div>
 </th>
-<th width="300">
-<div>Default value</div>
-</th>
-<th>
-<div>Is the last value storing?</div>
-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Flight speed</td>
-<td colspan="1">speed</td>
-<td colspan="1">Double</td>
-<td>Flight speed</td>
-<td colspan="1">
+<td>speed</td>
+<td>Double</td>
+<td>Flight speed<br />
 <p>The value corresponds to the value specified for the previous segment of the route.</p>
 <p>If there are no segments, the value is taken from the profile = default ground speed.</p>
 </td>
-<td colspan="1">no</td>
 </tr>
 <tr>
-<td>Turn type</td>
-<td colspan="1">wpTurnType</td>
-<td colspan="1">Selection</td>
-<td>
+<td>wpTurnType</td>
+<td>Selection<br>
 <p>Turn type. Can be one of the following values:</p>
 <ul>
 <li>STOP_AND_TURN;</li>
@@ -63,18 +48,15 @@ A detailed description of the parameters and a description of the calculation fe
 </ul>
 <p>When changing the machine, if selected value in the new list of allowed turn types, then it remains</p>
 </td>
-<td colspan="1">
+<td>
 <p>Turn type is selected from the list of available turn types for a profile.</p>
 <p>The default value is the default value for the profile</p>
 </td>
-<td colspan="1">yes (from 2.12 per profile)</td>
 </tr>
 <tr>
-<td colspan="1">Flight height</td>
-<td colspan="1">height</td>
-<td colspan="1">Double</td>
-<td colspan="1">Flight height</td>
-<td colspan="1">
+<td>height</td>
+<td>Double<br>Flight height</td>
+<td>
 <ol>
 <li>In case the area scan is the first scheduling algorithm in the route, the altitude value is formed according to the rule:<br />
 <ol>
@@ -95,54 +77,39 @@ A detailed description of the parameters and a description of the calculation fe
 </ol>
 <p>3. When altitude type is changed in area scan, flight height is reset</p>
 </td>
-<td colspan="1">no</td>
 </tr>
 <tr>
-<td colspan="1">Altitude type</td>
-<td colspan="1">altitudeType</td>
-<td colspan="1">Selection</td>
-<td colspan="1">
+<td>altitudeType</td>
+<td>Selection<br>
 <p>Usage altitude type:</p>
 <ul>
 <li>WGS84 - route traversing one given AMSL-altitude;</li>
 <li>AGL&nbsp;- route traversing one given AGL-altitude.</li>
 </ul>
 </td>
-<td colspan="1">AMSL</td>
-<td colspan="1">yes</td>
+<td>AMSL</td>
 </tr>
 <tr>
-<td colspan="1">Side distance</td>
-<td colspan="1">sideDistance</td>
-<td colspan="1">Double</td>
-<td colspan="1">Side distance.</td>
-<td colspan="1">null</td>
-<td colspan="1">yes</td>
+<td>sideDistance</td>
+<td>Double</td>
+<td>Side distance</td>
 </tr>
 <tr>
-<td colspan="1">Direction angle (0-360)</td>
-<td colspan="1">directionAngle</td>
-<td colspan="1">Double</td>
-<td colspan="1">
+<td>directionAngle</td>
+<td>Double<br>
 <p>Direction angle (0-360)</p>
 <p>Angle of rotation of the grid.</p>
 </td>
-<td colspan="1">0</td>
-<td colspan="1">yes</td>
+<td>0</td>
 </tr>
 <tr>
-<td colspan="1">Avoid obstacles</td>
-<td colspan="1">avoidObstacles</td>
-<td colspan="1">Boolean</td>
-<td colspan="1">Avoid obstacles</td>
-<td colspan="1">yes</td>
-<td colspan="1">yes</td>
+<td>avoidObstacles</td>
+<td>Boolean<br>Avoid obstacles</td>
+<td>yes</td>
 </tr>
 <tr>
-<td colspan="1">Action execution</td>
-<td colspan="1">actionExecution</td>
-<td colspan="1">Selection</td>
-<td colspan="1">
+<td>actionExecution</td>
+<td>Selection<br>
 <p>Action execution. Shows when actions are to be performed:</p>
 <ul>
 <li>ONLY_AT_START - only at the starting point;</li>
@@ -150,50 +117,36 @@ A detailed description of the parameters and a description of the calculation fe
 <li>ACTIONS_ON_FORWARD_PASSES - at each point of passes. But when turning, the camera should turn off.</li>
 </ul>
 </td>
-<td colspan="1">every point</td>
-<td colspan="1">yes</td>
+<td>every point</td>
 </tr>
 <tr>
-<td colspan="1">Overshoot</td>
-<td colspan="1">overshoot</td>
-<td colspan="1">Double</td>
-<td colspan="1">
+<td>overshoot</td>
+<td>Double<br>
 <p>Overshoot</p>
 <p>Additional distance beyond the snake, which must be passed to properly and completely pass through the snake taking into account the features of the rotation of the plane.</p>
 </td>
-<td colspan="1">null</td>
-<td colspan="1">yes</td>
+<td></td>
 </tr>
 <tr>
-<td colspan="1">Overshoot speed</td>
-<td colspan="1">overshootSpeed</td>
-<td colspan="1">Double</td>
-<td colspan="1">Speed for overshoot part</td>
-<td colspan="1">null</td>
-<td colspan="1">yes</td>
+<td>overshootSpeed</td>
+<td>Double</td>
+<td>Speed for overshoot part</td>
 </tr>
 <tr>
-<td colspan="1">Allow partial calculation</td>
-<td colspan="1">areaScanAllowPartialCalculation</td>
-<td colspan="1">Boolean</td>
-<td colspan="1">Whether to allow partial path computation or to throw an error when some of the points are inaccessible for some reason</td>
-<td colspan="1">no</td>
-<td colspan="1">yes</td>
+<td>areaScanAllowPartialCalculation</td>
+<td>Boolean</td>
+<td>Whether to allow partial path computation or to throw an error when some of the points are inaccessible for some reason</td>
+
 </tr>
 <tr>
-<td colspan="1">AGL Tolerance</td>
-<td colspan="1">tolerance</td>
-<td colspan="1">Double</td>
-<td colspan="1">Allowable height difference, when you can not put additional points. An additional point is placed if it goes beyond this boundary.</td>
-<td colspan="1">3</td>
-<td colspan="1">yes</td>
+<td>tolerance</td>
+<td>Double</td>
+<td>Allowable height difference, when you can not put additional points. An additional point is placed if it goes beyond this boundary.</td>
 </tr>
 <tr>
-<td colspan="1">No actions at last point</td>
-<td colspan="1">noActionsAtLastPoint</td>
-<td colspan="1">Boolean</td>
-<td colspan="1">Do not perform actions at the last point</td>
-<td colspan="1">yes</td>
+<td>noActionsAtLastPoint</td>
+<td>Boolean</td>
+<td>Do not perform actions at the last point</td>
 </tr>
 </tbody>
 </table>
