@@ -12,142 +12,140 @@ A detailed description of the parameters and a description of the calculation fe
 - Waypoint
 
 # Area scan
-<sub>
 <table>
 <thead>
 <tr>
 <th>
-<div>Name in UCS</div>
+<div><sub>Name in UCS</sub></div>
 </th>
 <th>
-<div>Type</div>
+<div><sub>Type</sub></div>
 </th>
 <th>
-<div>Purpose</div>
+<div><sub>Purpose</sub></div>
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>speed</td>
-<td>Double</td>
-<td>Flight speed<br />
-<p>The value corresponds to the value specified for the previous segment of the route.</p>
-<p>If there are no segments, the value is taken from the profile = default ground speed.</p>
+<td><sub>speed</sub></td>
+<td><sub>Double</sub></td>
+<td><sub>Flight speed</sub><br />
+<p><sub>The value corresponds to the value specified for the previous segment of the route.</sub></p>
+<p><sub>If there are no segments, the value is taken from the profile = default ground speed.</sub></p>
 </td>
 </tr>
 <tr>
-<td>wpTurnType</td>
-<td>Selection<br>
-<p>Turn type. Can be one of the following values:</p>
+<td><sub>wpTurnType</sub></td>
+<td><sub>Selection</sub><br>
+<p><sub>Turn type. Can be one of the following values:</sub></p>
 <ul>
-<li>STOP_AND_TURN;</li>
-<li>STRAIGHT;</li>
-<li>SPLINE;</li>
-<li>BANK_TURN.</li>
+<li><sub>STOP_AND_TURN;</sub></li>
+<li><sub>STRAIGHT;</sub></li>
+<li><sub>SPLINE;</sub></li>
+<li><sub>BANK_TURN.</sub></li>
 </ul>
-<p>When changing the machine, if selected value in the new list of allowed turn types, then it remains</p>
+<p><sub>When changing the machine, if selected value in the new list of allowed turn types, then it remains</sub></p>
 </td>
 <td>
-<p>Turn type is selected from the list of available turn types for a profile.</p>
-<p>The default value is the default value for the profile</p>
+<p><sub>Turn type is selected from the list of available turn types for a profile.</sub></p>
+<p><sub>The default value is the default value for the profile</sub></p>
 </td>
 </tr>
 <tr>
-<td>height</td>
-<td>Double<br>Flight height</td>
+<td><sub>height</sub></td>
+<td><sub>Double<br>Flight height</sub></td>
 <td>
 <ol>
-<li>In case the area scan is the first scheduling algorithm in the route, the altitude value is formed according to the rule:<br />
+<li><sub>In case the area scan is the first scheduling algorithm in the route, the altitude value is formed according to the rule:</sub><br />
 <ol>
-<li>altitude type of the route is AGL, altitude type of the area scan is AMSL = value from the route settings from the emergency return altitude field is added to the elevation at the first point of the area scan set on the map. Accordingly, this value is emergency return altitude + elevation and will be Flight height</li>
-<li>altitude type of the route is AGL, altitude type of the area scan is AGL = value is taken from the route settings from the emergency return altitude field</li>
-<li>altitude type of the route is AMSL, altitude type of the area scan is AMSL = value is taken from the route settings from the emergency return altitude field</li>
-<li>altitude type of the route is AMSL, altitude type of the area scan is AGL = value from the route settings from the emergency return altitude field is subtracted from the elevation at the first point of the area scan set on the map. Accordingly, this value is emergency return altitude - elevation and will be Flight height</li>
+<li><sub>altitude type of the route is AGL, altitude type of the area scan is AMSL = value from the route settings from the emergency return altitude field is added to the elevation at the first point of the area scan set on the map. Accordingly, this value is emergency return altitude + elevation and will be Flight height</sub></li>
+<li><sub>altitude type of the route is AGL, altitude type of the area scan is AGL = value is taken from the route settings from the emergency return altitude field</sub></li>
+<li><sub>altitude type of the route is AMSL, altitude type of the area scan is AMSL = value is taken from the route settings from the emergency return altitude field</sub></li>
+<li><sub>altitude type of the route is AMSL, altitude type of the area scan is AGL = value from the route settings from the emergency return altitude field is subtracted from the elevation at the first point of the area scan set on the map. Accordingly, this value is emergency return altitude - elevation and will be Flight height</sub></li>
 </ol>
 </li>
-<li>In case the area scan is followed by another route algorithm:
+<li><sub>In case the area scan is followed by another route algorithm:</sub>
 <ol>
-<li>altitude type of the route is AGL, altitude type of the area scan is AMSL =&nbsp;altitude of the last scheduling algorithm is added to the elevation at the first point of the area scan set on the map. Accordingly, this value of altitude prevoius alghorithm + elevation and is the value of Flight height</li>
-<li>altitude type of the route is AGL, altitude type of the area scan is AGL = value is taken equal to the altitude of the last scheduling algorithm</li>
-<li>altitude type of the route is AMSL, altitude type of the area scan is AMSL = the value is taken equal to the altitude of the last scheduling algorithm<br /></li>
-<li>altitude type of the route is AMSL, altitude type of the area scan is AGL =&nbsp;altitude of the last scheduling algorithm is subtracted&nbsp;from the elevation at the first point of the area scan set on the map. Accordingly, this value of altitude prevoius alghorithm - elevation and is the value of Flight height</li>
+<li><sub>altitude type of the route is AGL, altitude type of the area scan is AMSL =&nbsp;altitude of the last scheduling algorithm is added to the elevation at the first point of the area scan set on the map. Accordingly, this value of altitude prevoius alghorithm + elevation and is the value of Flight height</sub></li>
+<li><sub>altitude type of the route is AGL, altitude type of the area scan is AGL = value is taken equal to the altitude of the last scheduling algorithm</sub></li>
+<li><sub>altitude type of the route is AMSL, altitude type of the area scan is AMSL = the value is taken equal to the altitude of the last scheduling algorithm</sub></li>
+<li><sub>altitude type of the route is AMSL, altitude type of the area scan is AGL =&nbsp;altitude of the last scheduling algorithm is subtracted&nbsp;from the elevation at the first point of the area scan set on the map. Accordingly, this value of altitude prevoius alghorithm - elevation and is the value of Flight height</sub></li>
 </ol>
 </li>
 </ol>
-<p>3. When altitude type is changed in area scan, flight height is reset</p>
+<p><sub>3. When altitude type is changed in area scan, flight height is reset</sub></p>
 </td>
 </tr>
 <tr>
-<td>altitudeType</td>
-<td>Selection<br>
-<p>Usage altitude type:</p>
+<td><sub>altitudeType</sub></td>
+<td><sub>Selection</sub><br>
+<p><sub>Usage altitude type:</sub></p>
 <ul>
-<li>WGS84 - route traversing one given AMSL-altitude;</li>
-<li>AGL&nbsp;- route traversing one given AGL-altitude.</li>
+<li><sub>WGS84 - route traversing one given AMSL-altitude;</sub></li>
+<li><sub>AGL&nbsp;- route traversing one given AGL-altitude.</sub></li>
 </ul>
 </td>
-<td>AMSL</td>
+<td><sub>AMSL</sub></td>
 </tr>
 <tr>
-<td>sideDistance</td>
-<td>Double</td>
-<td>Side distance</td>
+<td><sub>sideDistance</sub></td>
+<td><sub>Double</sub></td>
+<td><sub>Side distance</sub></td>
 </tr>
 <tr>
-<td>directionAngle</td>
-<td>Double<br>
-<p>Direction angle (0-360)</p>
-<p>Angle of rotation of the grid.</p>
+<td><sub>directionAngle</sub></td>
+<td><sub>Double</sub><br>
+<p><sub>Direction angle (0-360)</sub></p>
+<p><sub>Angle of rotation of the grid.</sub></p>
 </td>
-<td>0</td>
+<td><sub>0</sub></td>
 </tr>
 <tr>
-<td>avoidObstacles</td>
-<td>Boolean<br>Avoid obstacles</td>
-<td>yes</td>
+<td><sub>avoidObstacles</sub></td>
+<td><sub>Boolean<br>Avoid obstacles</sub></td>
+<td><sub>yes</sub></td>
 </tr>
 <tr>
-<td>actionExecution</td>
-<td>Selection<br>
-<p>Action execution. Shows when actions are to be performed:</p>
+<td><sub>actionExecution</sub></td>
+<td><sub>Selection</sub><br>
+<p>Action execution. Shows when actions are to be performed:</sub></p>
 <ul>
-<li>ONLY_AT_START - only at the starting point;</li>
-<li>ACTIONS_EVERY_POINT - at each point;</li>
-<li>ACTIONS_ON_FORWARD_PASSES - at each point of passes. But when turning, the camera should turn off.</li>
+<li><sub>ONLY_AT_START - only at the starting point;</sub></li>
+<li><sub>ACTIONS_EVERY_POINT - at each point;</sub></li>
+<li><sub>ACTIONS_ON_FORWARD_PASSES - at each point of passes. But when turning, the camera should turn off.</sub></li>
 </ul>
 </td>
-<td>every point</td>
+<td><sub>every point</sub></td>
 </tr>
 <tr>
-<td>overshoot</td>
-<td>Double<br>
-<p>Overshoot</p>
-<p>Additional distance beyond the snake, which must be passed to properly and completely pass through the snake taking into account the features of the rotation of the plane.</p>
+<td><sub>overshoot</sub></td>
+<td><sub>Double</sub><br>
+<p><sub>Overshoot</sub></p>
+<p><sub>Additional distance beyond the snake, which must be passed to properly and completely pass through the snake taking into account the features of the rotation of the plane.</sub></p>
 </td>
 <td></td>
 </tr>
 <tr>
-<td>overshootSpeed</td>
-<td>Double</td>
-<td>Speed for overshoot part</td>
+<td><sub>overshootSpeed</sub></td>
+<td><sub>Double</td>
+<td><sub>Speed for overshoot part</sub></td>
 </tr>
 <tr>
-<td>areaScanAllowPartialCalculation</td>
-<td>Boolean</td>
-<td>Whether to allow partial path computation or to throw an error when some of the points are inaccessible for some reason</td>
+<td><sub>areaScanAllowPartialCalculation</sub></td>
+<td><sub>Boolean</td>
+<td><sub>Whether to allow partial path computation or to throw an error when some of the points are inaccessible for some reason</sub></td>
 
 </tr>
 <tr>
-<td>tolerance</td>
-<td>Double</td>
-<td>Allowable height difference, when you can not put additional points. An additional point is placed if it goes beyond this boundary.</td>
+<td><sub>tolerance</td>
+<td><sub>Double</td>
+<td><sub>Allowable height difference, when you can not put additional points. An additional point is placed if it goes beyond this boundary.</sub></td>
 </tr>
 <tr>
-<td>noActionsAtLastPoint</td>
-<td>Boolean</td>
-<td>Do not perform actions at the last point</td>
+<td><sub>noActionsAtLastPoint</sub></td>
+<td><sub>Boolean</td>
+<td><sub>Do not perform actions at the last point</sub></td>
 </tr>
 </tbody>
 </table>
-</sub>
