@@ -11,22 +11,21 @@ A detailed description of the parameters and a description of the calculation fe
 - Takeoff
 - Waypoint
 
-# Area scan
 <table>
-<thead>
 <tr>
-<th width="30">
+<td colspan="3"><h2>Area scan</h2></td>
+</tr>
+<tr>
+<th>
 <div><sub>Name in UCS</sub></div>
 </th>
-<th width="30">
+<th>
 <div><sub>Type</sub></div>
 </th>
-<th width="40">
+<th>
 <div><sub>Purpose</sub></div>
 </th>
 </tr>
-</thead>
-<tbody>
 <tr>
 <td><sub>speed</sub></td>
 <td><sub>Double</sub></td>
@@ -149,25 +148,20 @@ A detailed description of the parameters and a description of the calculation fe
 <td><sub>Boolean</td>
 <td><sub>Do not perform actions at the last point</sub></td>
 </tr>
-</tbody>
-</table>
-
-# Circle
-<table>
-<thead>
 <tr>
-<th width="30">
+<td colspan="3"><h2>Circle</h2></td>
+</tr>
+<tr>
+<th>
 <div><sub>Name in UCS</sub></div>
 </th>
-<th width="30">
+<th>
 <div><sub>Type</sub></div>
 </th>
-<th width="40">
+<th>
 <div><sub>Purpose</sub></div>
 </th>
 </tr>
-</thead>
-<tbody>
 <tr>
 <td><sub>speed</sub></td>
 <td><sub>Double</sub></td>
@@ -239,5 +233,4 @@ A detailed description of the parameters and a description of the calculation fe
 <td><sub>Boolean</sub></td>
 <td><sub>Do not perform actions at the last point</sub></td>
 </tr>
-</tbody>
 </table>
