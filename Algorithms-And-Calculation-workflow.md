@@ -15,13 +15,13 @@ A detailed description of the parameters and a description of the calculation fe
 <table>
 <thead>
 <tr>
-<th>
+<th width="30">
 <div><sub>Name in UCS</sub></div>
 </th>
-<th>
+<th width="30">
 <div><sub>Type</sub></div>
 </th>
-<th>
+<th width="40">
 <div><sub>Purpose</sub></div>
 </th>
 </tr>
@@ -152,17 +152,17 @@ A detailed description of the parameters and a description of the calculation fe
 </tbody>
 </table>
 
-#Circle
+# Circle
 <table>
 <thead>
 <tr>
-<th>
+<th width="30">
 <div><sub>Name in UCS</sub></div>
 </th>
-<th>
+<th width="30">
 <div><sub>Type</sub></div>
 </th>
-<th>
+<th width="40">
 <div><sub>Purpose</sub></div>
 </th>
 </tr>
