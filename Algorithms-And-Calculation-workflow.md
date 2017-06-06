@@ -381,11 +381,9 @@ A detailed description of the parameters and a description of the calculation fe
 </td>
 </tr>
 <tr>
-<td><sub>Camera</sub></td>
 <td><sub>camera</sub></td>
-<td><sub>Selection</sub><br />
-<p><sub>Camera</sub></p>
-<p><sub>List of identifier and name of cameras</sub></p>
+<td><sub>Selection</sub></td>
+<td><p><sub>List of identifier and name of cameras</sub></p>
 <p><sub>Select the camera available for this profile.</sub></p></td>
 </tr>
 <tr>
