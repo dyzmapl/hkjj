@@ -53,8 +53,9 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>height</sub></td>
-<td><sub>Double<br>Flight height</sub></td>
+<td><sub>Double</sub></td>
 <td>
+Flight height
 <ul>
 <li><sub>In case the area scan is the first scheduling algorithm in the route, the altitude value is formed according to the rule:</sub><br />
 <ul>
