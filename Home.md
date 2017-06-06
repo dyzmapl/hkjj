@@ -521,6 +521,8 @@ notificationListener.AddSubscription(stTelemetry);
 
 ## Working with routes
 
+Route consits of segments.Each segment has parameters. Refer here https://github.com/ugcs/ugcs-dotnet-sdk/wiki/Algorithms-And-Calculation-workflow for the list of parameters for different segments.
+
 ### Create new route
 
 ```C#
