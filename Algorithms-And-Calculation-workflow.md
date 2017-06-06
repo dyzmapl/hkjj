@@ -489,4 +489,38 @@ A detailed description of the parameters and a description of the calculation fe
 <td><sub>Boolean</sub></td>
 <td><sub>Do not perform actions at the last point</sub></td>
 </tr>
+
+<tr>
+<td colspan="3"><h2>Takeoff</h2></td>
+</tr>
+<tr>
+<th>
+<div><sub>Name in UCS</sub></div>
+</th>
+<th>
+<div><sub>Type</sub></div>
+</th>
+<th>
+<div><sub>Purpose</sub></div>
+</th>
+</tr>
+<tr>
+<td><sub>speed</sub></td>
+<td><sub>Double</sub></td>
+<td><sub>Flight speed</sub><br />
+<p><sub>The value corresponds to the value specified for the previous segment of the route.</sub></p>
+<p><sub>If there are no segments, the value is taken from the profile = default ground speed.</sub></p>
+</td>
+</tr>
+<tr>
+<td><sub>avoidObstacles</sub></td>
+<td><sub>Boolean</sub></td>
+<td><sub>Avoid obstacles</sub></td>
+</tr>
+<tr>
+<td><sub>avoidTerrain</sub></td>
+<td><sub>Boolean</sub></td>
+<td><sub>Avoid terrain</sub></td>
+</tr>
+
 </table>
