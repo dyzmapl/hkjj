@@ -110,7 +110,7 @@ A detailed description of the parameters and a description of the calculation fe
 <tr>
 <td><sub>actionExecution</sub></td>
 <td><sub>Selection</sub><br>
-<p>Action execution. Shows when actions are to be performed:</sub></p>
+<p><sub>Action execution. Shows when actions are to be performed:</sub></p>
 <ul>
 <li><sub>ONLY_AT_START - only at the starting point;</sub></li>
 <li><sub>ACTIONS_EVERY_POINT - at each point;</sub></li>
@@ -121,11 +121,10 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>overshoot</sub></td>
-<td><sub>Double</sub><br>
-<p><sub>Overshoot</sub></p>
+<td><sub>Double</sub></td>
+<td><p><sub>Overshoot</sub></p>
 <p><sub>Additional distance beyond the snake, which must be passed to properly and completely pass through the snake taking into account the features of the rotation of the plane.</sub></p>
 </td>
-<td></td>
 </tr>
 <tr>
 <td><sub>overshootSpeed</sub></td>
@@ -209,13 +208,14 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>actionExecution</sub></td>
-<td><sub>Selection</sub></td>
-<td>
-<p><sub>Action execution. Shows when actions are to be performed:</sub></p>
+<td><sub>Selection</sub><br/ >Shows when actions are to be performed:
 <ul>
 <li><sub>ONLY_AT_START - only at the starting point;</sub></li>
 <li><sub>ACTIONS_EVERY_POINT - at each point.</sub></li>
 </ul>
+</td>
+<td>
+<p><sub>Action execution.</sub></p>
 </td>
 </tr>
 <tr>
@@ -314,13 +314,14 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>actionExecution</sub></td>
-<td><sub>Selection</sub></td>
-<td>
-<p><sub>Action execution. Shows when actions are to be performed:</sub></p>
+<td><sub>Selection</sub><br/ >Shows when actions are to be performed:
 <ul>
 <li><sub>ONLY_AT_START - only at the starting point;</sub></li>
 <li><sub>ACTIONS_EVERY_POINT - at each point.</sub></li>
 </ul>
+</td>
+<td>
+<p><sub>Action execution.</sub></p>
 </td>
 </tr>
 <tr>
@@ -432,14 +433,15 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>actionExecution</sub></td>
-<td><sub>Selection</sub></td>
-<td>
-<p><sub>Action execution. Shows when actions are to be performed:</sub></p>
+<td><sub>Selection</sub><br /><sub>Shows when actions are to be performed:</sub></p>
 <ul>
 <li><sub>ONLY_AT_START - only at the starting point;</sub></li>
 <li><sub>ACTIONS_EVERY_POINT - at each point;</sub></li>
 <li><sub>ACTIONS_ON_FORWARD_PASSES -&nbsp;at each point of passes. But when turning, the camera should turn off.</sub></li>
 </ul>
+</td>
+<td>
+<p><sub>Action execution.</sub>
 </td>
 </tr>
 <tr>
