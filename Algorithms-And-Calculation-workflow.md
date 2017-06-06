@@ -12,8 +12,8 @@ A detailed description of the parameters and a description of the calculation fe
 - Waypoint
 
 # Area scan
-
-<table style="font-size:11">
+<sub>
+<table>
 <thead>
 <tr>
 <th>
@@ -150,3 +150,4 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 </tbody>
 </table>
+</sub>
