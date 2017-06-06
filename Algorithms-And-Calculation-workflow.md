@@ -87,7 +87,7 @@ A detailed description of the parameters and a description of the calculation fe
 <li><sub>AGL&nbsp;- route traversing one given AGL-altitude.</sub></li>
 </ul>
 </td>
-<td><sub>AMSL</sub></td>
+<td></td>
 </tr>
 <tr>
 <td><sub>sideDistance</sub></td>
@@ -467,14 +467,14 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>altitudeType</sub></td>
-<td><sub>Selection</sub></td>
-<td>
+<td><sub>Selection</sub><br />
 <p><sub>Usage altitude type:</sub></p>
 <ul>
 <li><sub>WGS84 - route traversing one given AMSL-altitude;</sub></li>
 <li><sub>AGL&nbsp;-&nbsp;route traversing one given AGL-altitude. In this case, the passage occurs along the height relative to the lower point, and the distance between the passes is calculated so as to cover the entire surface at the highest and lowest points.</sub></li>
 </ul>
 </td>
+<td></td>
 </tr>
 <tr>
 <td><sub>areaScanAllowPartialCalculation</sub></td>
