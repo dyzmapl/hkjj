@@ -56,25 +56,27 @@ A detailed description of the parameters and a description of the calculation fe
 <td><sub>height</sub></td>
 <td><sub>Double<br>Flight height</sub></td>
 <td>
-<ol>
+<ul>
 <li><sub>In case the area scan is the first scheduling algorithm in the route, the altitude value is formed according to the rule:</sub><br />
-<ol>
+<ul>
 <li><sub>altitude type of the route is AGL, altitude type of the area scan is AMSL = value from the route settings from the emergency return altitude field is added to the elevation at the first point of the area scan set on the map. Accordingly, this value is emergency return altitude + elevation and will be Flight height</sub></li>
 <li><sub>altitude type of the route is AGL, altitude type of the area scan is AGL = value is taken from the route settings from the emergency return altitude field</sub></li>
 <li><sub>altitude type of the route is AMSL, altitude type of the area scan is AMSL = value is taken from the route settings from the emergency return altitude field</sub></li>
 <li><sub>altitude type of the route is AMSL, altitude type of the area scan is AGL = value from the route settings from the emergency return altitude field is subtracted from the elevation at the first point of the area scan set on the map. Accordingly, this value is emergency return altitude - elevation and will be Flight height</sub></li>
-</ol>
+</ul>
 </li>
 <li><sub>In case the area scan is followed by another route algorithm:</sub>
-<ol>
+<ul>
 <li><sub>altitude type of the route is AGL, altitude type of the area scan is AMSL =&nbsp;altitude of the last scheduling algorithm is added to the elevation at the first point of the area scan set on the map. Accordingly, this value of altitude prevoius alghorithm + elevation and is the value of Flight height</sub></li>
 <li><sub>altitude type of the route is AGL, altitude type of the area scan is AGL = value is taken equal to the altitude of the last scheduling algorithm</sub></li>
 <li><sub>altitude type of the route is AMSL, altitude type of the area scan is AMSL = the value is taken equal to the altitude of the last scheduling algorithm</sub></li>
 <li><sub>altitude type of the route is AMSL, altitude type of the area scan is AGL =&nbsp;altitude of the last scheduling algorithm is subtracted&nbsp;from the elevation at the first point of the area scan set on the map. Accordingly, this value of altitude prevoius alghorithm - elevation and is the value of Flight height</sub></li>
-</ol>
+</ul>
 </li>
-</ol>
-<p><sub>3. When altitude type is changed in area scan, flight height is reset</sub></p>
+</ul>
+<ul>
+<li><sub>When altitude type is changed in area scan, flight height is reset</sub></p></li>
+</ul>
 </td>
 </tr>
 <tr>
