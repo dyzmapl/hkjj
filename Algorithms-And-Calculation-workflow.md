@@ -13,7 +13,7 @@ A detailed description of the parameters and a description of the calculation fe
 
 <table>
 <tr>
-<td colspan="3"><h2>Area scan</h2></td>
+<td colspan="3"><a name="areascan"></a><h2>Area scan</h2></td>
 </tr>
 <tr>
 <th>
