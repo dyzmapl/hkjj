@@ -3,7 +3,7 @@
 Each algorithm has its own set of parameters (part common, part specific). 
 A detailed description of the parameters and a description of the calculation features are given in the following topics:
 
-- Area scan
+- <a href="#areascan">Area scan</a>
 - Circle
 - Landing
 - Perimeter
