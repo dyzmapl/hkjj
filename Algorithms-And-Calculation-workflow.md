@@ -209,7 +209,7 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>actionExecution</sub></td>
-<td><sub>Selection</sub><br/ >Shows when actions are to be performed:
+<td><sub>Selection</sub><br/ ><sub>Shows when actions are to be performed:</sub
 <ul>
 <li><sub>ONLY_AT_START - only at the starting point;</sub></li>
 <li><sub>ACTIONS_EVERY_POINT - at each point.</sub></li>
@@ -315,7 +315,7 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 <tr>
 <td><sub>actionExecution</sub></td>
-<td><sub>Selection</sub><br/ >Shows when actions are to be performed:
+<td><sub>Selection</sub><br/ ><sub>Shows when actions are to be performed:</sub>
 <ul>
 <li><sub>ONLY_AT_START - only at the starting point;</sub></li>
 <li><sub>ACTIONS_EVERY_POINT - at each point.</sub></li>
