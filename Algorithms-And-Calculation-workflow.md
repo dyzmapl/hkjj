@@ -4,12 +4,12 @@ Each algorithm has its own set of parameters (part common, part specific).
 A detailed description of the parameters and a description of the calculation features are given in the following topics:
 
 - <a href="#areascan">Area scan</a>
-- Circle
-- Landing
-- Perimeter
-- Photogrammetry tool
-- Takeoff
-- Waypoint
+- <a href="#circle">Circle</a>
+- <a href="#landing">Landing</a>
+- <a href="#perimeter">Perimeter</a>
+- <a href="#photogrammetry">Photogrammetry tool</a>
+- <a href="#takeoff">Takeoff</a>
+- <a href="#waypoint">Waypoint</a>
 
 <table>
 <tr>
@@ -149,7 +149,7 @@ A detailed description of the parameters and a description of the calculation fe
 <td><sub>Do not perform actions at the last point</sub></td>
 </tr>
 <tr>
-<td colspan="3"><h2>Circle</h2></td>
+<td colspan="3"><a name="circle"></a><h2>Circle</h2></td>
 </tr>
 <tr>
 <th>
@@ -235,7 +235,7 @@ A detailed description of the parameters and a description of the calculation fe
 <td><sub>Do not perform actions at the last point</sub></td>
 </tr>
 <tr>
-<td colspan="3"><h2>Landing</h2></td>
+<td colspan="3"><a name="landing"></a><h2>Landing</h2></td>
 </tr>
 <tr>
 <th>
@@ -260,7 +260,7 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 
 <tr>
-<td colspan="3"><h2>Perimeter</h2></td>
+<td colspan="3"><a name="perimeter"></a><h2></h2></td>
 </tr>
 <tr>
 <th>
@@ -343,7 +343,7 @@ A detailed description of the parameters and a description of the calculation fe
 
 
 <tr>
-<td colspan="3"><h2>Photogrammetry tool</h2></td>
+<td colspan="3"><a name="photogrammetrytool"></a><h2>Photogrammetry tool</h2></td>
 </tr>
 <tr>
 <th>
@@ -492,7 +492,7 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 
 <tr>
-<td colspan="3"><h2>Takeoff</h2></td>
+<td colspan="3"><a name="takeoff"></a><h2>Takeoff</h2></td>
 </tr>
 <tr>
 <th>
@@ -525,7 +525,7 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 
 <tr>
-<td colspan="3"><h2>Waypoint</h2></td>
+<td colspan="3"><a name="waypoint"></a><h2>Waypoint</h2></td>
 </tr>
 <tr>
 <th>
