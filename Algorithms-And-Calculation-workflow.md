@@ -260,7 +260,7 @@ A detailed description of the parameters and a description of the calculation fe
 </tr>
 
 <tr>
-<td colspan="3"><a name="perimeter"></a><h2></h2></td>
+<td colspan="3"><a name="perimeter"></a><h2>Perimeter</h2></td>
 </tr>
 <tr>
 <th>
