@@ -7,7 +7,7 @@ A detailed description of the parameters and a description of the calculation fe
 - <a href="#circle">Circle</a>
 - <a href="#landing">Landing</a>
 - <a href="#perimeter">Perimeter</a>
-- <a href="#photogrammetry">Photogrammetry tool</a>
+- <a href="#photogrammetrytool">Photogrammetry tool</a>
 - <a href="#takeoff">Takeoff</a>
 - <a href="#waypoint">Waypoint</a>
 
