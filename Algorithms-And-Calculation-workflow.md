@@ -195,7 +195,7 @@ A detailed description of the parameters and a description of the calculation fe
 <tr>
 <td><sub>flightClockwise</sub></td>
 <td><sub>Boolean</sub></td>
-<td><sub>Fly cloclwise</sub></td>
+<td><sub>Fly clockwise</sub></td>
 </tr>
 <tr>
 <td><sub>basePointsQnt</sub></td>
